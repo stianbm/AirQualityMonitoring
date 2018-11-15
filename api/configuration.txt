@@ -1,0 +1,3 @@
+{
+"pollutants" : ["co2_ppm", "particles_0_3um", "particles_3_10um"],
+ "methods" : ["grid_average", "dummy_method"]}
