@@ -79,7 +79,7 @@ class variables():
 # The text message is generated in a helper method defined in helper_methods.py
 class help_manual(Resource):
     def get(self):
-        return Response(helpers.generate_help_message(vars), mimetype='text/xml')
+        return Response(helpers.generate_help_message(vars), mimetype='text')
 
 class fetch(Resource):
     def get(self):
@@ -393,7 +393,8 @@ def fetch_data(payload, params, size=max_number_of_datapoints, page_start=0):
     # pagination error, or authentication error
     if "hits" not in request_object.keys():
         # On a pagination fault, the returned payload will have the field 'error' in the message
-        if "message" in request_object.keys() and "Error" in request_object["message"].values():
+        print("request_object : ", request_object)
+        if "message" in request_object.keys() and "Error" in request_object["message"]:
             print("size + page is over 10000, presumabbly")
             return
 
@@ -483,8 +484,6 @@ def fetch_data(payload, params, size=max_number_of_datapoints, page_start=0):
     return data_list
 
 
-api.add_resource(fetch, '/fetch')
-api.add_resource(help_manual, '/help')
-if __name__ == '__main__':
-    vars = variables()
-    app.run(debug=True)
+api.add_resource(fetch, '/api/fetch')
+api.add_resource(help_manual, '/api/')
+vars = variables()
